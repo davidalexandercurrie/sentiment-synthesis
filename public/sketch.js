@@ -34,12 +34,12 @@ function submitText() {
   let text = textInput.value;
   if (text != '') {
     document.getElementById('chat-input').value = '';
-    createP(text)
+    giveSentiment(text, 'local');
+    createP(text + ' ' + rating)
       .addClass('chat-line')
       .parent(document.getElementById('chat-window'));
     var chat = document.getElementById('chat-window');
     chat.scrollTop = chat.scrollHeight;
-    giveSentiment(text, 'local');
     var data = {
       msg: text,
     };
@@ -49,7 +49,7 @@ function submitText() {
 function giveSentiment(text, from) {
   if (modelIsReady) {
     const prediction = sentiment.predict(text);
-    console.log(prediction);
+    rating = Math.round((prediction.score + Number.EPSILON) * 1000) / 1000;
     if (from == 'local') {
       console.log('local');
       playSound(prediction);
@@ -66,12 +66,12 @@ function giveSentiment(text, from) {
 }
 
 function receiveMsg(data) {
-  createP(data.msg)
+  giveSentiment(data.msg, 'outside');
+  createP(data.msg + ' ' + rating)
     .addClass('chat-line')
     .parent(document.getElementById('chat-window'));
   var chat = document.getElementById('chat-window');
   chat.scrollTop = chat.scrollHeight;
-  giveSentiment(text, 'outside');
 }
 
 setInterval(() => {

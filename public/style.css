@@ -131,4 +131,10 @@ body {
   background-repeat: repeat-x;
   background-size: 16px 16px;
 }
+
+#sentiment-value {
+  position: absolute;
+  text-align: right;
+  width: 80%;
+}
 /*# sourceMappingURL=style.css.map */

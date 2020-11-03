@@ -132,3 +132,8 @@ body {
     background-size: $height $height;
   }
 }
+#sentiment-value {
+  position: absolute;
+  text-align: right;
+  width: 80%;
+}
