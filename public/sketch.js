@@ -1,6 +1,7 @@
 let sentiment;
 let modelIsReady = false;
 let osc;
+let osc2;
 let playing = false;
 
 // Get the input field
@@ -20,6 +21,7 @@ function setup() {
   // Create a new Sentiment method
   sentiment = ml5.sentiment('movieReviews', modelReady);
   osc = new p5.Oscillator('sine');
+  osc2 = new p5.Oscillator('sine');
 }
 // When the model is loaded
 function modelReady() {
@@ -37,22 +39,29 @@ function submitText() {
       .parent(document.getElementById('chat-window'));
     var chat = document.getElementById('chat-window');
     chat.scrollTop = chat.scrollHeight;
-    giveSentiment(text);
+    giveSentiment(text, 'local');
     var data = {
       msg: text,
     };
     socket.emit('msg', data);
   }
 }
-function giveSentiment(text) {
+function giveSentiment(text, from) {
   if (modelIsReady) {
     const prediction = sentiment.predict(text);
     console.log(prediction);
-    playSound(prediction);
+    if (from == 'local') {
+      console.log('local');
+      playSound(prediction);
+    } else {
+      console.log('outside');
+      playSoundFromOtherPeople(prediction);
+    }
   }
   if (!playing) {
     playing = true;
     osc.start();
+    osc2.start();
   }
 }
 
@@ -62,7 +71,7 @@ function receiveMsg(data) {
     .parent(document.getElementById('chat-window'));
   var chat = document.getElementById('chat-window');
   chat.scrollTop = chat.scrollHeight;
-  giveSentiment(text);
+  giveSentiment(text, 'outside');
 }
 
 setInterval(() => {
@@ -73,4 +82,7 @@ setInterval(() => {
 
 function playSound(prediction) {
   osc.freq(prediction.score * 2000 + 100);
+}
+function playSoundFromOtherPeople(prediction) {
+  osc2.freq(2100 - (prediction.score * 2000 + 100));
 }
