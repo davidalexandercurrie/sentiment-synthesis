@@ -6,6 +6,7 @@ body {
   min-height: 100vh;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 *,
@@ -20,8 +21,9 @@ input[type='text'] {
   height: 10%;
   padding: 0;
   margin: 0;
-  border: 2px solid pink;
+  border: 2px solid #1f2041ff;
   font-size: 5vh;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 textarea:focus,
@@ -32,21 +34,21 @@ input:focus {
 #submit-button {
   width: 10%;
   padding: 0;
-  background: pink;
+  background: #d0cebaff;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 4vh;
-  color: blue;
+  font-size: 2vw;
+  color: #1f2041ff;
   line-height: 50px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   /* Standard */
+  border: 2px solid #1f2041ff;
 }
 
 #submit-button:hover {
-  background-color: yellow;
+  background-color: #417b5aff;
   cursor: pointer;
 }
 
@@ -62,11 +64,11 @@ input:focus {
 
 #chat-window {
   height: 90%;
-  border: 2px solid pink;
+  border: 2px solid #1f2041ff;
   padding: 1em;
   font-size: 20px;
   overflow-y: scroll;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2041ff;
 }
 
 #input-section {

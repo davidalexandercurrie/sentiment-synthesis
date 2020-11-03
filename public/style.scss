@@ -1,3 +1,9 @@
+$color1: #1f2041ff;
+$color2: #4b3f72ff;
+$color3: #417b5aff;
+$color4: #d0cebaff;
+$color5: #e9d2c0ff;
+
 html,
 body {
   margin: 0;
@@ -5,6 +11,7 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
 }
 *,
 *:before,
@@ -16,8 +23,9 @@ input[type='text'] {
   height: 10%;
   padding: 0;
   margin: 0;
-  border: 2px solid pink;
+  border: 2px solid $color1;
   font-size: 5vh;
+  font-family: 'Courier New', Courier, monospace;
 }
 textarea:focus,
 input:focus {
@@ -26,15 +34,15 @@ input:focus {
 #submit-button {
   width: 10%;
   padding: 0;
-  background: pink;
+  background: $color4;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 4vh;
-  color: blue;
+  font-size: 2vw;
+  color: $color1;
   line-height: 50px;
   user-select: none; /* Standard */
+  border: 2px solid $color1;
   &:hover {
-    background-color: yellow;
+    background-color: $color3;
     cursor: pointer;
   }
   &:active {
@@ -48,11 +56,11 @@ input:focus {
 }
 #chat-window {
   height: 90%;
-  border: 2px solid pink;
+  border: 2px solid $color1;
   padding: 1em;
   font-size: 20px;
   overflow-y: scroll;
-  font-family: Arial, Helvetica, sans-serif;
+  color: $color1;
 }
 #input-section {
   display: flex;
