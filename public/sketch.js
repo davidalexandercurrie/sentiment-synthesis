@@ -12,6 +12,9 @@ window.onload = function () {
 
 function setup() {
   noCanvas();
+  socket = io.connect();
+  console.log(socket);
+  socket.on('msg', receiveMsg);
   // Create a new Sentiment method
   sentiment = ml5.sentiment('movieReviews', modelReady);
 }
@@ -24,17 +27,32 @@ function modelReady() {
 function submitText() {
   let textInput = document.getElementById('chat-input');
   let text = textInput.value;
-  document.getElementById('chat-input').value = '';
-  createP(text)
-    .addClass('chat-line')
-    .parent(document.getElementById('chat-window'));
-  var chat = document.getElementById('chat-window');
-  chat.scrollTop = chat.scrollHeight;
-  giveSentiment(text);
+  if (text != '') {
+    document.getElementById('chat-input').value = '';
+    createP(text)
+      .addClass('chat-line')
+      .parent(document.getElementById('chat-window'));
+    var chat = document.getElementById('chat-window');
+    chat.scrollTop = chat.scrollHeight;
+    giveSentiment(text);
+    var data = {
+      msg: text,
+    };
+    socket.emit('msg', data);
+  }
 }
 function giveSentiment(text) {
   if (modelIsReady) {
     const prediction = sentiment.predict(text);
     console.log(prediction);
   }
+}
+
+function receiveMsg(data) {
+  createP(data.msg)
+    .addClass('chat-line')
+    .parent(document.getElementById('chat-window'));
+  var chat = document.getElementById('chat-window');
+  chat.scrollTop = chat.scrollHeight;
+  giveSentiment(text);
 }
