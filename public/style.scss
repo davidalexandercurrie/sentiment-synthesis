@@ -24,6 +24,7 @@ input[type='text'] {
   padding: 0;
   margin: 0;
   border: 2px solid $color1;
+  border-top: 1px;
   font-size: 5vh;
   font-family: 'Courier New', Courier, monospace;
 }
@@ -41,6 +42,8 @@ input:focus {
   line-height: 50px;
   user-select: none; /* Standard */
   border: 2px solid $color1;
+  border-top: 1px;
+  border-left: 1px;
   &:hover {
     background-color: $color3;
     cursor: pointer;

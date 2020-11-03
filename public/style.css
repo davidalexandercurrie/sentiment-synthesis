@@ -22,6 +22,7 @@ input[type='text'] {
   padding: 0;
   margin: 0;
   border: 2px solid #1f2041ff;
+  border-top: 1px;
   font-size: 5vh;
   font-family: 'Courier New', Courier, monospace;
 }
@@ -45,6 +46,8 @@ input:focus {
           user-select: none;
   /* Standard */
   border: 2px solid #1f2041ff;
+  border-top: 1px;
+  border-left: 1px;
 }
 
 #submit-button:hover {
