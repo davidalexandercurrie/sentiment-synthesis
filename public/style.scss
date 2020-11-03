@@ -52,10 +52,17 @@ input:focus {
     color: purple;
   }
 }
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: line-through;
+  text-decoration-color: $color3;
+  // margin-bottom: 0;
+}
 #chat-container {
   width: 80%;
   height: 80vh;
-  margin: 10em auto;
+  margin: 0em auto;
 }
 #chat-window {
   height: 90%;
@@ -71,4 +78,58 @@ input:focus {
 .chat-line {
   padding: 0;
   margin: 0;
+}
+
+$height: 16px;
+$halfheight: ($height/2);
+$thickness: 110%; // increase to make the line thicker
+$offset: 4px;
+$backgroundcolor: #fff;
+$linecolor: $color1;
+
+body {
+  background: $backgroundcolor;
+}
+
+.zigzag {
+  margin: 2em 0;
+  margin-top: 0;
+  background: $backgroundcolor;
+  position: relative;
+  height: $height;
+  z-index: 1;
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+  &:before {
+    height: ($height - $offset);
+    top: $thickness;
+    background: linear-gradient(-135deg, $linecolor $halfheight, transparent 0)
+        0 $halfheight,
+      linear-gradient(135deg, $linecolor $halfheight, transparent 0) 0
+        $halfheight;
+    background-position: top left;
+    background-repeat: repeat-x;
+    background-size: $height $height;
+  }
+  &:after {
+    height: $height;
+    top: 100%;
+    background: linear-gradient(
+          -135deg,
+          $backgroundcolor $halfheight,
+          transparent 0
+        )
+        0 $halfheight,
+      linear-gradient(135deg, $backgroundcolor $halfheight, transparent 0) 0
+        $halfheight;
+    background-position: top left;
+    background-repeat: repeat-x;
+    background-size: $height $height;
+  }
 }
