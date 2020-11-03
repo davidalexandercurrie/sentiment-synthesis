@@ -56,3 +56,9 @@ function receiveMsg(data) {
   chat.scrollTop = chat.scrollHeight;
   giveSentiment(text);
 }
+
+setInterval(() => {
+  let zigzags = document.getElementsByClassName('zigzag');
+  zigzags[0].style.left = Math.random() * 20 + 'px';
+  zigzags[1].style.left = Math.random() * 20 + 'px';
+}, 50);
