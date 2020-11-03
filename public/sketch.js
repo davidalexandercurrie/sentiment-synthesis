@@ -1,5 +1,7 @@
 let sentiment;
 let modelIsReady = false;
+let osc;
+let playing = false;
 
 // Get the input field
 window.onload = function () {
@@ -17,6 +19,7 @@ function setup() {
   socket.on('msg', receiveMsg);
   // Create a new Sentiment method
   sentiment = ml5.sentiment('movieReviews', modelReady);
+  osc = new p5.Oscillator('sine');
 }
 // When the model is loaded
 function modelReady() {
@@ -45,6 +48,11 @@ function giveSentiment(text) {
   if (modelIsReady) {
     const prediction = sentiment.predict(text);
     console.log(prediction);
+    playSound(prediction);
+  }
+  if (!playing) {
+    playing = true;
+    osc.start();
   }
 }
 
@@ -62,3 +70,7 @@ setInterval(() => {
   zigzags[0].style.left = Math.random() * 20 + 'px';
   zigzags[1].style.left = Math.random() * 20 + 'px';
 }, 50);
+
+function playSound(prediction) {
+  osc.freq(prediction.score * 2000 + 100);
+}
